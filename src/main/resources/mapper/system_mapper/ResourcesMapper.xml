@@ -81,7 +81,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from ass_resources
+    from sms_resources
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -92,21 +92,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from ass_resources
+    from sms_resources
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from ass_resources
+    delete from sms_resources
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.sms.entity.system_entity.example.ResourcesExample" >
-    delete from ass_resources
+    delete from sms_resources
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.sms.entity.system_entity.Resources" >
-    insert into ass_resources (id, resource_name, resource_id, 
+    insert into sms_resources (id, resource_name, resource_id,
       resource_type, resource_icon, resource_path, 
       resource_link, resource_order, resource_display, 
       note)
@@ -116,7 +116,7 @@
       #{note,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.sms.entity.system_entity.Resources" >
-    insert into ass_resources
+    insert into sms_resources
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -183,13 +183,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.sms.entity.system_entity.example.ResourcesExample" resultType="java.lang.Integer" >
-    select count(*) from ass_resources
+    select count(*) from sms_resources
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update ass_resources
+    update sms_resources
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
@@ -227,7 +227,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update ass_resources
+    update sms_resources
     set id = #{record.id,jdbcType=INTEGER},
       resource_name = #{record.resourceName,jdbcType=VARCHAR},
       resource_id = #{record.resourceId,jdbcType=VARCHAR},
@@ -243,7 +243,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.sms.entity.system_entity.Resources" >
-    update ass_resources
+    update sms_resources
     <set >
       <if test="resourceName != null" >
         resource_name = #{resourceName,jdbcType=VARCHAR},
@@ -276,7 +276,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sms.entity.system_entity.Resources" >
-    update ass_resources
+    update sms_resources
     set resource_name = #{resourceName,jdbcType=VARCHAR},
       resource_id = #{resourceId,jdbcType=VARCHAR},
       resource_type = #{resourceType,jdbcType=INTEGER},

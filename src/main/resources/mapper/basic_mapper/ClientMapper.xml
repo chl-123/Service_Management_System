@@ -69,7 +69,7 @@
     id, client_name, create_time, note
   </sql>
   <select id="selectClientBySelective" resultMap="BaseResultMap">
-    select * from ass_client
+    select * from sms_client
     <where>
       <if test="clientName != null" >
         and client_name like CONCAT('%',#{clientName},'%')
@@ -82,7 +82,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from ass_client
+    from sms_client
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,27 +93,27 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from ass_client
+    from sms_client
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from ass_client
+    delete from sms_client
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.sms.entity.basic_entity.example.ClientExample" >
-    delete from ass_client
+    delete from sms_client
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.sms.entity.basic_entity.Client" >
-    insert into ass_client (id, client_name, create_time, 
+    insert into sms_client (id, client_name, create_time,
       note)
     values (#{id,jdbcType=INTEGER}, #{clientName,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
       #{note,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.sms.entity.basic_entity.Client" >
-    insert into ass_client
+    insert into sms_client
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -144,13 +144,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.sms.entity.basic_entity.example.ClientExample" resultType="java.lang.Integer" >
-    select count(*) from ass_client
+    select count(*) from sms_client
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update ass_client
+    update sms_client
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
@@ -170,7 +170,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update ass_client
+    update sms_client
     set id = #{record.id,jdbcType=INTEGER},
       client_name = #{record.clientName,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=DATE},
@@ -180,7 +180,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.sms.entity.basic_entity.Client" >
-    update ass_client
+    update sms_client
     <set >
       <if test="clientName != null" >
         client_name = #{clientName,jdbcType=VARCHAR},
@@ -195,7 +195,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sms.entity.basic_entity.Client" >
-    update ass_client
+    update sms_client
     set client_name = #{clientName,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=DATE},
       note = #{note,jdbcType=VARCHAR}

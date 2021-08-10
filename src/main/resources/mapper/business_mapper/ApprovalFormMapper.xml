@@ -81,7 +81,7 @@
   <select id="selectApprovalFormBySelective" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from ass_approval_form
+    from sms_approval_form
     <where>
       <if test="archiveNum != null" >
         and archive_num like CONCAT('%',#{archiveNum},'%')
@@ -114,7 +114,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from ass_approval_form
+    from sms_approval_form
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -125,21 +125,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from ass_approval_form
+    from sms_approval_form
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from ass_approval_form
+    delete from sms_approval_form
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.sms.entity.business_entity.example.ApprovalFormExample" >
-    delete from ass_approval_form
+    delete from sms_approval_form
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.sms.entity.business_entity.ApprovalForm" >
-    insert into ass_approval_form (id, archive_num, client_name, 
+    insert into sms_approval_form (id, archive_num, client_name,
       product_drawing_num, gear_case_num, release_date, 
       start_warranty_date, feedback_info, creator_name, 
       create_time, modifier_name, modify_date, 
@@ -151,7 +151,7 @@
       #{attachmentPath,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.sms.entity.business_entity.ApprovalForm" >
-    insert into ass_approval_form
+    insert into sms_approval_form
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -236,13 +236,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.sms.entity.business_entity.example.ApprovalFormExample" resultType="java.lang.Integer" >
-    select count(*) from ass_approval_form
+    select count(*) from sms_approval_form
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update ass_approval_form
+    update sms_approval_form
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
@@ -289,7 +289,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update ass_approval_form
+    update sms_approval_form
     set id = #{record.id,jdbcType=INTEGER},
       archive_num = #{record.archiveNum,jdbcType=VARCHAR},
       client_name = #{record.clientName,jdbcType=VARCHAR},
@@ -308,7 +308,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.sms.entity.business_entity.ApprovalForm" >
-    update ass_approval_form
+    update sms_approval_form
     <set >
       <if test="archiveNum != null" >
         archive_num = #{archiveNum,jdbcType=VARCHAR},
@@ -350,7 +350,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sms.entity.business_entity.ApprovalForm" >
-    update ass_approval_form
+    update sms_approval_form
     set archive_num = #{archiveNum,jdbcType=VARCHAR},
       client_name = #{clientName,jdbcType=VARCHAR},
       product_drawing_num = #{productDrawingNum,jdbcType=VARCHAR},

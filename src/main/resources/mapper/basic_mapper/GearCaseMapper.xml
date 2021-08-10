@@ -82,7 +82,7 @@
   <select id="selectGearCaseBySelective" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from ass_gear_case
+    from sms_gear_case
     <where>
       <if test="clientName != null" >
         and client_name like CONCAT('%',#{clientName},'%')
@@ -120,7 +120,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from ass_gear_case
+    from sms_gear_case
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -131,21 +131,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from ass_gear_case
+    from sms_gear_case
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from ass_gear_case
+    delete from sms_gear_case
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.sms.entity.basic_entity.example.GearCaseExample" >
-    delete from ass_gear_case
+    delete from sms_gear_case
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.sms.entity.basic_entity.GearCase" >
-    insert into ass_gear_case (id, client_name, product_drawing_num, 
+    insert into sms_gear_case (id, client_name, product_drawing_num,
       gear_case_num, power, velocity_ratio, 
       assembly_date, release_date, wind_field, 
       wind_turbine_num, grid_connected_date, start_warranty_date, 
@@ -157,7 +157,7 @@
       #{qualityProblemsNote,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.sms.entity.basic_entity.GearCase" >
-    insert into ass_gear_case
+    insert into sms_gear_case
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -242,13 +242,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.sms.entity.basic_entity.example.GearCaseExample" resultType="java.lang.Integer" >
-    select count(*) from ass_gear_case
+    select count(*) from sms_gear_case
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update ass_gear_case
+    update sms_gear_case
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
@@ -295,7 +295,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update ass_gear_case
+    update sms_gear_case
     set id = #{record.id,jdbcType=INTEGER},
       client_name = #{record.clientName,jdbcType=VARCHAR},
       product_drawing_num = #{record.productDrawingNum,jdbcType=VARCHAR},
@@ -314,7 +314,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.sms.entity.basic_entity.GearCase" >
-    update ass_gear_case
+    update sms_gear_case
     <set >
       <if test="clientName != null" >
         client_name = #{clientName,jdbcType=VARCHAR},
@@ -356,7 +356,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sms.entity.basic_entity.GearCase" >
-    update ass_gear_case
+    update sms_gear_case
     set client_name = #{clientName,jdbcType=VARCHAR},
       product_drawing_num = #{productDrawingNum,jdbcType=VARCHAR},
       gear_case_num = #{gearCaseNum,jdbcType=VARCHAR},

@@ -67,7 +67,7 @@
     id, problem_type
   </sql>
   <select id="selectProblemBySelective" resultMap="BaseResultMap">
-    select * from ass_problem
+    select * from sms_problem
     <where>
       <if test="problemType != null" >
         and problem_type like CONCAT('%',#{problemType},'%')
@@ -82,7 +82,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from ass_problem
+    from sms_problem
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,25 +93,25 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from ass_problem
+    from sms_problem
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from ass_problem
+    delete from sms_problem
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.sms.entity.basic_entity.example.ProblemExample" >
-    delete from ass_problem
+    delete from sms_problem
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.sms.entity.basic_entity.Problem" >
-    insert into ass_problem (id, problem_type)
+    insert into sms_problem (id, problem_type)
     values (#{id,jdbcType=INTEGER}, #{problemType,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.sms.entity.basic_entity.Problem" >
-    insert into ass_problem
+    insert into sms_problem
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -130,13 +130,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.sms.entity.basic_entity.example.ProblemExample" resultType="java.lang.Integer" >
-    select count(*) from ass_problem
+    select count(*) from sms_problem
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update ass_problem
+    update sms_problem
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
@@ -150,7 +150,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update ass_problem
+    update sms_problem
     set id = #{record.id,jdbcType=INTEGER},
       problem_type = #{record.problemType,jdbcType=VARCHAR}
     <if test="_parameter != null" >
@@ -158,7 +158,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.sms.entity.basic_entity.Problem" >
-    update ass_problem
+    update sms_problem
     <set >
       <if test="problemType != null" >
         problem_type = #{problemType,jdbcType=VARCHAR},
@@ -167,7 +167,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sms.entity.basic_entity.Problem" >
-    update ass_problem
+    update sms_problem
     set problem_type = #{problemType,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

@@ -72,7 +72,7 @@
     id, role_name, role_id, role_level, role_status, create_time, note
   </sql>
   <select id="selectRoleBySelective" resultMap="BaseResultMap">
-    select * from ass_role
+    select * from sms_role
     <where>
       <if test="roleName != null" >
         and role_name like CONCAT('%',#{roleName},'%')
@@ -92,7 +92,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from ass_role
+    from sms_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -103,21 +103,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from ass_role
+    from sms_role
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from ass_role
+    delete from sms_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.sms.entity.system_entity.example.RoleExample" >
-    delete from ass_role
+    delete from sms_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.sms.entity.system_entity.Role" >
-    insert into ass_role (id, role_name, role_id, 
+    insert into sms_role (id, role_name, role_id,
       role_level, role_status, create_time, 
       note)
     values (#{id,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, 
@@ -125,7 +125,7 @@
       #{note,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.sms.entity.system_entity.Role" >
-    insert into ass_role
+    insert into sms_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -174,13 +174,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.sms.entity.system_entity.example.RoleExample" resultType="java.lang.Integer" >
-    select count(*) from ass_role
+    select count(*) from sms_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update ass_role
+    update sms_role
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
@@ -209,7 +209,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update ass_role
+    update sms_role
     set id = #{record.id,jdbcType=INTEGER},
       role_name = #{record.roleName,jdbcType=VARCHAR},
       role_id = #{record.roleId,jdbcType=VARCHAR},
@@ -222,7 +222,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.sms.entity.system_entity.Role" >
-    update ass_role
+    update sms_role
     <set >
       <if test="roleName != null" >
         role_name = #{roleName,jdbcType=VARCHAR},
@@ -246,7 +246,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sms.entity.system_entity.Role" >
-    update ass_role
+    update sms_role
     set role_name = #{roleName,jdbcType=VARCHAR},
       role_id = #{roleId,jdbcType=VARCHAR},
       role_level = #{roleLevel,jdbcType=VARCHAR},
