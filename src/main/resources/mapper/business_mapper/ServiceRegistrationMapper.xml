@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sms.component.mapper.business_mapper.ServiceRegistrationMapper" >
+  <resultMap id="BaseResultMap" type="com.sms.entity.business_entity.ServiceRegistration" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="archive_num" property="archiveNum" jdbcType="VARCHAR" />
+    <result column="client_name" property="clientName" jdbcType="VARCHAR" />
+    <result column="product_drawing_num" property="productDrawingNum" jdbcType="VARCHAR" />
+    <result column="gear_case_num" property="gearCaseNum" jdbcType="VARCHAR" />
+    <result column="release_date" property="releaseDate" jdbcType="DATE" />
+    <result column="start_warranty_date" property="startWarrantyDate" jdbcType="DATE" />
+    <result column="disposer_name" property="disposerName" jdbcType="VARCHAR" />
+    <result column="dispose_method" property="disposeMethod" jdbcType="VARCHAR" />
+    <result column="dispose_date" property="disposeDate" jdbcType="DATE" />
+    <result column="error_description" property="errorDescription" jdbcType="VARCHAR" />
+    <result column="attachment_path" property="attachmentPath" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, archive_num, client_name, product_drawing_num, gear_case_num, release_date, start_warranty_date, 
+    disposer_name, dispose_method, dispose_date, error_description, attachment_path
+  </sql>
+  <select id="selectServiceRegistrationBySelective" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ass_service_registration
+    <where>
+      <if test="archiveNum != null" >
+        and archive_num like CONCAT('%',#{archiveNum},'%')
+      </if>
+      <if test="clientName != null" >
+        and client_name like CONCAT('%',#{clientName},'%')
+      </if>
+      <if test="productDrawingNum != null" >
+        and product_drawing_num like CONCAT('%',#{productDrawingNum},'%')
+      </if>
+      <if test="gearCaseNum != null" >
+        and gear_case_num like CONCAT('%',#{gearCaseNum},'%')
+      </if>
+      <if test="releaseDateStart != null and releaseDateEnd!=null" >
+        and release_date like between #{releaseDateStart} and #{releaseDateEnd}
+      </if>
+      <if test="startWarrantyDateStart != null and startWarrantyDateEnd!=null" >
+        and start_warranty_date between #{startWarrantyDateStart} and #{startWarrantyDateEnd}
+      </if>
+      <if test="disposerName != null" >
+        and disposer_name like CONCAT('%',#{disposerName},'%')
+      </if>
+      <if test="disposeDateStart != null and disposeDateEnd!=null" >
+        and dispose_date between #{disposeDateStart} and #{disposeDateEnd}
+      </if>
+
+    </where>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sms.entity.business_entity.example.ServiceRegistrationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ass_service_registration
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ass_service_registration
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ass_service_registration
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sms.entity.business_entity.example.ServiceRegistrationExample" >
+    delete from ass_service_registration
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sms.entity.business_entity.ServiceRegistration" >
+    insert into ass_service_registration (id, archive_num, client_name, 
+      product_drawing_num, gear_case_num, release_date, 
+      start_warranty_date, disposer_name, dispose_method, 
+      dispose_date, error_description, attachment_path
+      )
+    values (#{id,jdbcType=INTEGER}, #{archiveNum,jdbcType=VARCHAR}, #{clientName,jdbcType=VARCHAR}, 
+      #{productDrawingNum,jdbcType=VARCHAR}, #{gearCaseNum,jdbcType=VARCHAR}, #{releaseDate,jdbcType=DATE}, 
+      #{startWarrantyDate,jdbcType=DATE}, #{disposerName,jdbcType=VARCHAR}, #{disposeMethod,jdbcType=VARCHAR}, 
+      #{disposeDate,jdbcType=DATE}, #{errorDescription,jdbcType=VARCHAR}, #{attachmentPath,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sms.entity.business_entity.ServiceRegistration" >
+    insert into ass_service_registration
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="archiveNum != null" >
+        archive_num,
+      </if>
+      <if test="clientName != null" >
+        client_name,
+      </if>
+      <if test="productDrawingNum != null" >
+        product_drawing_num,
+      </if>
+      <if test="gearCaseNum != null" >
+        gear_case_num,
+      </if>
+      <if test="releaseDate != null" >
+        release_date,
+      </if>
+      <if test="startWarrantyDate != null" >
+        start_warranty_date,
+      </if>
+      <if test="disposerName != null" >
+        disposer_name,
+      </if>
+      <if test="disposeMethod != null" >
+        dispose_method,
+      </if>
+      <if test="disposeDate != null" >
+        dispose_date,
+      </if>
+      <if test="errorDescription != null" >
+        error_description,
+      </if>
+      <if test="attachmentPath != null" >
+        attachment_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="archiveNum != null" >
+        #{archiveNum,jdbcType=VARCHAR},
+      </if>
+      <if test="clientName != null" >
+        #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="productDrawingNum != null" >
+        #{productDrawingNum,jdbcType=VARCHAR},
+      </if>
+      <if test="gearCaseNum != null" >
+        #{gearCaseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDate != null" >
+        #{releaseDate,jdbcType=DATE},
+      </if>
+      <if test="startWarrantyDate != null" >
+        #{startWarrantyDate,jdbcType=DATE},
+      </if>
+      <if test="disposerName != null" >
+        #{disposerName,jdbcType=VARCHAR},
+      </if>
+      <if test="disposeMethod != null" >
+        #{disposeMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="disposeDate != null" >
+        #{disposeDate,jdbcType=DATE},
+      </if>
+      <if test="errorDescription != null" >
+        #{errorDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentPath != null" >
+        #{attachmentPath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sms.entity.business_entity.example.ServiceRegistrationExample" resultType="java.lang.Integer" >
+    select count(*) from ass_service_registration
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ass_service_registration
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.archiveNum != null" >
+        archive_num = #{record.archiveNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientName != null" >
+        client_name = #{record.clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productDrawingNum != null" >
+        product_drawing_num = #{record.productDrawingNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gearCaseNum != null" >
+        gear_case_num = #{record.gearCaseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.releaseDate != null" >
+        release_date = #{record.releaseDate,jdbcType=DATE},
+      </if>
+      <if test="record.startWarrantyDate != null" >
+        start_warranty_date = #{record.startWarrantyDate,jdbcType=DATE},
+      </if>
+      <if test="record.disposerName != null" >
+        disposer_name = #{record.disposerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disposeMethod != null" >
+        dispose_method = #{record.disposeMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disposeDate != null" >
+        dispose_date = #{record.disposeDate,jdbcType=DATE},
+      </if>
+      <if test="record.errorDescription != null" >
+        error_description = #{record.errorDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachmentPath != null" >
+        attachment_path = #{record.attachmentPath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ass_service_registration
+    set id = #{record.id,jdbcType=INTEGER},
+      archive_num = #{record.archiveNum,jdbcType=VARCHAR},
+      client_name = #{record.clientName,jdbcType=VARCHAR},
+      product_drawing_num = #{record.productDrawingNum,jdbcType=VARCHAR},
+      gear_case_num = #{record.gearCaseNum,jdbcType=VARCHAR},
+      release_date = #{record.releaseDate,jdbcType=DATE},
+      start_warranty_date = #{record.startWarrantyDate,jdbcType=DATE},
+      disposer_name = #{record.disposerName,jdbcType=VARCHAR},
+      dispose_method = #{record.disposeMethod,jdbcType=VARCHAR},
+      dispose_date = #{record.disposeDate,jdbcType=DATE},
+      error_description = #{record.errorDescription,jdbcType=VARCHAR},
+      attachment_path = #{record.attachmentPath,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sms.entity.business_entity.ServiceRegistration" >
+    update ass_service_registration
+    <set >
+      <if test="archiveNum != null" >
+        archive_num = #{archiveNum,jdbcType=VARCHAR},
+      </if>
+      <if test="clientName != null" >
+        client_name = #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="productDrawingNum != null" >
+        product_drawing_num = #{productDrawingNum,jdbcType=VARCHAR},
+      </if>
+      <if test="gearCaseNum != null" >
+        gear_case_num = #{gearCaseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDate != null" >
+        release_date = #{releaseDate,jdbcType=DATE},
+      </if>
+      <if test="startWarrantyDate != null" >
+        start_warranty_date = #{startWarrantyDate,jdbcType=DATE},
+      </if>
+      <if test="disposerName != null" >
+        disposer_name = #{disposerName,jdbcType=VARCHAR},
+      </if>
+      <if test="disposeMethod != null" >
+        dispose_method = #{disposeMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="disposeDate != null" >
+        dispose_date = #{disposeDate,jdbcType=DATE},
+      </if>
+      <if test="errorDescription != null" >
+        error_description = #{errorDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentPath != null" >
+        attachment_path = #{attachmentPath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sms.entity.business_entity.ServiceRegistration" >
+    update ass_service_registration
+    set archive_num = #{archiveNum,jdbcType=VARCHAR},
+      client_name = #{clientName,jdbcType=VARCHAR},
+      product_drawing_num = #{productDrawingNum,jdbcType=VARCHAR},
+      gear_case_num = #{gearCaseNum,jdbcType=VARCHAR},
+      release_date = #{releaseDate,jdbcType=DATE},
+      start_warranty_date = #{startWarrantyDate,jdbcType=DATE},
+      disposer_name = #{disposerName,jdbcType=VARCHAR},
+      dispose_method = #{disposeMethod,jdbcType=VARCHAR},
+      dispose_date = #{disposeDate,jdbcType=DATE},
+      error_description = #{errorDescription,jdbcType=VARCHAR},
+      attachment_path = #{attachmentPath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

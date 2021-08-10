@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sms.component.mapper.basic_mapper.GearCaseMapper" >
+  <resultMap id="BaseResultMap" type="com.sms.entity.basic_entity.GearCase" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="client_name" property="clientName" jdbcType="VARCHAR" />
+    <result column="product_drawing_num" property="productDrawingNum" jdbcType="VARCHAR" />
+    <result column="gear_case_num" property="gearCaseNum" jdbcType="VARCHAR" />
+    <result column="power" property="power" jdbcType="VARCHAR" />
+    <result column="velocity_ratio" property="velocityRatio" jdbcType="VARCHAR" />
+    <result column="assembly_date" property="assemblyDate" jdbcType="DATE" />
+    <result column="release_date" property="releaseDate" jdbcType="DATE" />
+    <result column="wind_field" property="windField" jdbcType="VARCHAR" />
+    <result column="wind_turbine_num" property="windTurbineNum" jdbcType="VARCHAR" />
+    <result column="grid_connected_date" property="gridConnectedDate" jdbcType="DATE" />
+    <result column="start_warranty_date" property="startWarrantyDate" jdbcType="DATE" />
+    <result column="quality_problems_note" property="qualityProblemsNote" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, client_name, product_drawing_num, gear_case_num, power, velocity_ratio, assembly_date, 
+    release_date, wind_field, wind_turbine_num, grid_connected_date, start_warranty_date, 
+    quality_problems_note
+  </sql>
+  <select id="selectGearCaseBySelective" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ass_gear_case
+    <where>
+      <if test="clientName != null" >
+        and client_name like CONCAT('%',#{clientName},'%')
+      </if>
+      <if test="productDrawingNum != null" >
+        and product_drawing_num like CONCAT('%',#{productDrawingNum},'%')
+      </if>
+      <if test="gearCaseNum != null" >
+        and gear_case_num like CONCAT('%',#{gearCaseNum},'%')
+      </if>
+      <if test="assemblyDateStart != null and assemblyDateEnd!=null" >
+        and assembly_date like between #{assemblyDateStart} and #{assemblyDateEnd}
+      </if>
+      <if test="releaseDateStart != null and releaseDateEnd!=null" >
+        and release_date like between #{releaseDateStart} and #{releaseDateEnd}
+      </if>
+      <if test="windField != null" >
+        and wind_field like CONCAT('%',#{windField},'%')
+      </if>
+      <if test="windTurbineNum != null" >
+        and wind_turbine_num like CONCAT('%',#{windTurbineNum},'%')
+      </if>
+      <if test="gridConnectedDateStart != null and gridConnectedDateEnd!=null" >
+        and grid_connected_date between #{gridConnectedDateStart} and #{gridConnectedDateEnd}
+      </if>
+      <if test="startWarrantyDateStart != null and startWarrantyDateEnd!=null" >
+        and start_warranty_date between #{startWarrantyDateStart} and #{startWarrantyDateEnd}
+      </if>
+
+    </where>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sms.entity.basic_entity.example.GearCaseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ass_gear_case
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ass_gear_case
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ass_gear_case
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sms.entity.basic_entity.example.GearCaseExample" >
+    delete from ass_gear_case
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sms.entity.basic_entity.GearCase" >
+    insert into ass_gear_case (id, client_name, product_drawing_num, 
+      gear_case_num, power, velocity_ratio, 
+      assembly_date, release_date, wind_field, 
+      wind_turbine_num, grid_connected_date, start_warranty_date, 
+      quality_problems_note)
+    values (#{id,jdbcType=INTEGER}, #{clientName,jdbcType=VARCHAR}, #{productDrawingNum,jdbcType=VARCHAR}, 
+      #{gearCaseNum,jdbcType=VARCHAR}, #{power,jdbcType=VARCHAR}, #{velocityRatio,jdbcType=VARCHAR}, 
+      #{assemblyDate,jdbcType=DATE}, #{releaseDate,jdbcType=DATE}, #{windField,jdbcType=VARCHAR}, 
+      #{windTurbineNum,jdbcType=VARCHAR}, #{gridConnectedDate,jdbcType=DATE}, #{startWarrantyDate,jdbcType=DATE}, 
+      #{qualityProblemsNote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sms.entity.basic_entity.GearCase" >
+    insert into ass_gear_case
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="clientName != null" >
+        client_name,
+      </if>
+      <if test="productDrawingNum != null" >
+        product_drawing_num,
+      </if>
+      <if test="gearCaseNum != null" >
+        gear_case_num,
+      </if>
+      <if test="power != null" >
+        power,
+      </if>
+      <if test="velocityRatio != null" >
+        velocity_ratio,
+      </if>
+      <if test="assemblyDate != null" >
+        assembly_date,
+      </if>
+      <if test="releaseDate != null" >
+        release_date,
+      </if>
+      <if test="windField != null" >
+        wind_field,
+      </if>
+      <if test="windTurbineNum != null" >
+        wind_turbine_num,
+      </if>
+      <if test="gridConnectedDate != null" >
+        grid_connected_date,
+      </if>
+      <if test="startWarrantyDate != null" >
+        start_warranty_date,
+      </if>
+      <if test="qualityProblemsNote != null" >
+        quality_problems_note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="clientName != null" >
+        #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="productDrawingNum != null" >
+        #{productDrawingNum,jdbcType=VARCHAR},
+      </if>
+      <if test="gearCaseNum != null" >
+        #{gearCaseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="power != null" >
+        #{power,jdbcType=VARCHAR},
+      </if>
+      <if test="velocityRatio != null" >
+        #{velocityRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="assemblyDate != null" >
+        #{assemblyDate,jdbcType=DATE},
+      </if>
+      <if test="releaseDate != null" >
+        #{releaseDate,jdbcType=DATE},
+      </if>
+      <if test="windField != null" >
+        #{windField,jdbcType=VARCHAR},
+      </if>
+      <if test="windTurbineNum != null" >
+        #{windTurbineNum,jdbcType=VARCHAR},
+      </if>
+      <if test="gridConnectedDate != null" >
+        #{gridConnectedDate,jdbcType=DATE},
+      </if>
+      <if test="startWarrantyDate != null" >
+        #{startWarrantyDate,jdbcType=DATE},
+      </if>
+      <if test="qualityProblemsNote != null" >
+        #{qualityProblemsNote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sms.entity.basic_entity.example.GearCaseExample" resultType="java.lang.Integer" >
+    select count(*) from ass_gear_case
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ass_gear_case
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.clientName != null" >
+        client_name = #{record.clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productDrawingNum != null" >
+        product_drawing_num = #{record.productDrawingNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gearCaseNum != null" >
+        gear_case_num = #{record.gearCaseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.power != null" >
+        power = #{record.power,jdbcType=VARCHAR},
+      </if>
+      <if test="record.velocityRatio != null" >
+        velocity_ratio = #{record.velocityRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assemblyDate != null" >
+        assembly_date = #{record.assemblyDate,jdbcType=DATE},
+      </if>
+      <if test="record.releaseDate != null" >
+        release_date = #{record.releaseDate,jdbcType=DATE},
+      </if>
+      <if test="record.windField != null" >
+        wind_field = #{record.windField,jdbcType=VARCHAR},
+      </if>
+      <if test="record.windTurbineNum != null" >
+        wind_turbine_num = #{record.windTurbineNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gridConnectedDate != null" >
+        grid_connected_date = #{record.gridConnectedDate,jdbcType=DATE},
+      </if>
+      <if test="record.startWarrantyDate != null" >
+        start_warranty_date = #{record.startWarrantyDate,jdbcType=DATE},
+      </if>
+      <if test="record.qualityProblemsNote != null" >
+        quality_problems_note = #{record.qualityProblemsNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ass_gear_case
+    set id = #{record.id,jdbcType=INTEGER},
+      client_name = #{record.clientName,jdbcType=VARCHAR},
+      product_drawing_num = #{record.productDrawingNum,jdbcType=VARCHAR},
+      gear_case_num = #{record.gearCaseNum,jdbcType=VARCHAR},
+      power = #{record.power,jdbcType=VARCHAR},
+      velocity_ratio = #{record.velocityRatio,jdbcType=VARCHAR},
+      assembly_date = #{record.assemblyDate,jdbcType=DATE},
+      release_date = #{record.releaseDate,jdbcType=DATE},
+      wind_field = #{record.windField,jdbcType=VARCHAR},
+      wind_turbine_num = #{record.windTurbineNum,jdbcType=VARCHAR},
+      grid_connected_date = #{record.gridConnectedDate,jdbcType=DATE},
+      start_warranty_date = #{record.startWarrantyDate,jdbcType=DATE},
+      quality_problems_note = #{record.qualityProblemsNote,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sms.entity.basic_entity.GearCase" >
+    update ass_gear_case
+    <set >
+      <if test="clientName != null" >
+        client_name = #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="productDrawingNum != null" >
+        product_drawing_num = #{productDrawingNum,jdbcType=VARCHAR},
+      </if>
+      <if test="gearCaseNum != null" >
+        gear_case_num = #{gearCaseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="power != null" >
+        power = #{power,jdbcType=VARCHAR},
+      </if>
+      <if test="velocityRatio != null" >
+        velocity_ratio = #{velocityRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="assemblyDate != null" >
+        assembly_date = #{assemblyDate,jdbcType=DATE},
+      </if>
+      <if test="releaseDate != null" >
+        release_date = #{releaseDate,jdbcType=DATE},
+      </if>
+      <if test="windField != null" >
+        wind_field = #{windField,jdbcType=VARCHAR},
+      </if>
+      <if test="windTurbineNum != null" >
+        wind_turbine_num = #{windTurbineNum,jdbcType=VARCHAR},
+      </if>
+      <if test="gridConnectedDate != null" >
+        grid_connected_date = #{gridConnectedDate,jdbcType=DATE},
+      </if>
+      <if test="startWarrantyDate != null" >
+        start_warranty_date = #{startWarrantyDate,jdbcType=DATE},
+      </if>
+      <if test="qualityProblemsNote != null" >
+        quality_problems_note = #{qualityProblemsNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sms.entity.basic_entity.GearCase" >
+    update ass_gear_case
+    set client_name = #{clientName,jdbcType=VARCHAR},
+      product_drawing_num = #{productDrawingNum,jdbcType=VARCHAR},
+      gear_case_num = #{gearCaseNum,jdbcType=VARCHAR},
+      power = #{power,jdbcType=VARCHAR},
+      velocity_ratio = #{velocityRatio,jdbcType=VARCHAR},
+      assembly_date = #{assemblyDate,jdbcType=DATE},
+      release_date = #{releaseDate,jdbcType=DATE},
+      wind_field = #{windField,jdbcType=VARCHAR},
+      wind_turbine_num = #{windTurbineNum,jdbcType=VARCHAR},
+      grid_connected_date = #{gridConnectedDate,jdbcType=DATE},
+      start_warranty_date = #{startWarrantyDate,jdbcType=DATE},
+      quality_problems_note = #{qualityProblemsNote,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
